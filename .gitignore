@@ -1,0 +1,9 @@
+Debug/
+Release/
+.idea/
+bin/
+build/
+dataset/*
+config/*
+
+!config/20231227_1_para.yaml

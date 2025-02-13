@@ -1,0 +1,90 @@
+# Seamless_VLP_RTK: Optimization-Based VLP/RTK/INS Integrated Navigation System
+
+# integration scheme
+scheme: 2 # 1: loose 2: tight
+imu_type: 2 # 1: dji_imu 2: openlog 3: i300
+INS_only: false
+is_NHC: false
+coord_est: false
+thre_N: 17
+thre_P1: 4
+thre_P2: 40
+
+# 数据文件
+# Data files
+imufile: "dataset/20231227_1/IMU_2023-12-27-21-15-08.txt"
+vlpfile: "dataset/20231227_1/VLP_20231227_211450_8.txt"
+gnssfile: "dataset/20231227_1/20231227_1.nmea.bin"
+#vlpfile: "dataset/20231227_1/gt_2023-12-27-21-15-08.txt"
+outputpath: "dataset/20231227_1/"
+
+# 时间信息, s
+# Processing time parameters
+windows: 20
+starttime: 1703682910
+endtime: 1703682984
+GPSweek: 2272
+
+# 初始化信息
+# Initialization parameters
+initcoordinate: [30.53549523, 114.3536403,  12.2080]
+initpos: [0, 0,  0] # bug, should be NED, not NEU
+initvel: [ 0, 0, 0 ]   # 北东地速度 (NED velocity), m/s
+initatt: [ -1.46, 0.27, 238] # 横滚俯仰航向 (RPY attitude), deg
+
+# IMU初始误差 (NED)
+# IMU constant biases
+initgb: [407, -386, -420]  # 初始陀螺零偏 (gyroscope biases), deg/hr
+initab: [0 ,0 , 0]  # 初始加表零偏 (accelerometer biases), mGal
+
+# IMU原始数据频率, Hz
+# IMU data rate
+imudatarate: 100
+
+# 安装参数
+# Installation parameters
+antlever: [ 0.05, 0.12, 0.04 ] # GNSS杆臂 (antenna lever), IMU前右下方向, m
+vlplever: [ 0.1, 0, 0 ]        # PD杆臂 (odometer lever), IMU前右下方向, m
+bodyangle: [ 0, 0, 0 ]       # IMU到载体的旋转角 (mouting angles to construct C_b^v), deg
+
+odometer:
+    isuseodo: false             # use odometer
+
+    std: [ 0.3, 0.3, 0.05 ]   # 里程标准差 (vehicle velocity standard deviation), m/s
+    srw: 100                    # 比例因子误差 (odometer scale-factor standard deviation), PPM
+
+# IMU噪声建模参数
+# IMU noise parameters
+imumodel:
+    arw: 1     # deg/sqrt(hr)
+    vrw: 2    # m/s/sqrt(hr)
+    gbstd: 10   # deg/hr
+    abstd: 500   # mGal
+    corrtime: 1.0 # hr
+    
+# vlp parameters
+H: 0.65 # PD height
+isvlp: true
+NLED: 6 # max 6
+LED: [0.9800,0,2.9100,5.1500,0,2.9200,0.9800,3.0100,2.8600,5.1500,2.9500,2.8500,0.9800,6.5600,2.7700,5.1500,6.5600,2.8300]
+transmission_power: [197.4512,191.4007,251.7358,158.9863,244.7067,93.7494]
+lamber_coef: [0.9200,1.0000,1.0000,0.5859,1.0000,0.8385]
+err: [0.05,0.05,0.05]
+dir: -127.4 # direction of local coordinate
+delta_r: [10.0,-2.11,0.65] # from start point to local origin, NED
+
+# vlp仿真中断配置
+# vlp outage parameters
+isuseoutage: false
+outagetime: 0
+outagelen: 60
+outageperiod: 180
+
+# 固定阈值VLP抗差 (m)
+# a fixed threshold for VLP outlier-culling using positioning standard deviation
+vlpthreshold: 20
+
+# GNSS parameters
+isgnss: true
+istdgnss: true
+sat_pair: [48,50,129,149]

@@ -2,7 +2,7 @@
 
 ## Optimization-Based VLP/RTK/INS Integrated Navigation System
 
-Seamless_VLP_RTK is derived from Seamless_VLP_RTK.
+Seamless_VLP_RTK is derived from [OB_GINS_VLP](https://github.com/ShawnSun95/OB_GINS_VLP).
 
 Loosely coupled and tightly coupled integration are both realized. We recommend you to use visual studio code on linux to run our program. We have provided the configuration files in `.vscode/`.
 
@@ -74,3 +74,16 @@ We provide a program to plot the navigation results and evaluate the accuracy ba
 ```shell
 python3 ./plot_results.py --optimized_poses ./dataset/20231227_1/output.nav --ground_truth ./dataset/20231227_1/gt_2023-12-27-21-15-08.txt 
 ```
+
+If you use Seamless_VLP_RTK in an academic work, please cite:
+
+    @article{SUN2025102781,
+        title = {Tightly coupled integration of Visible Light Positioning, GNSS, and INS for indoor/outdoor transition areas},
+        journal = {Information Fusion},
+        volume = {117},
+        pages = {102781},
+        year = {2025},
+        issn = {1566-2535},
+        doi = {https://doi.org/10.1016/j.inffus.2024.102781},
+        author = {Xiao Sun and Yuan Zhuang and Zhenqi Zheng and Hao Zhang and Binliang Wang and Xuan Wang and Jiasheng Zhou},
+    }
